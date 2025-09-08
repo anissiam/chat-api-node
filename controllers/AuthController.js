@@ -6,10 +6,7 @@ const maxAge = 1000 * 60 * 60 * 24 * 3;
 
 
 const createToken = (email, userId) => {
-    return jwt.sign({email,userId}, process.env.JWT_KEY, {expiresIn: maxAge,
-        httpOnly: true,    // الكوكي ماينعرضش للـ JS في المتصفح
-        secure: true,      // لازم على https (Vercel / Render)
-        sameSite: "none"   // عشان الكوكي يشتغل عبر دومينات مختلفة
+    return jwt.sign({email,userId}, process.env.JWT_KEY, {expiresIn: maxAge
     })
 }
 
@@ -184,7 +181,9 @@ export const removeProfileImage = async (req,res)=>{
 export const logout = async (req,res)=>{
     try {
 
-        res.cookie('jwt','',{maxAge:1});
+        res.cookie('jwt','',{maxAge:1, httpOnly: true,    // الكوكي ماينعرضش للـ JS في المتصفح
+            secure: true,      // لازم على https (Vercel / Render)
+            sameSite: "none"});
 
         return res.status(200).json(
             {message: 'Logout successfully'}

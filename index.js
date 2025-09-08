@@ -14,8 +14,6 @@ const app = express();
 const port = process.env.PORT || 3001;
 const databaseURL = process.env.DATABASE_URL;
 
-console.log(process.env.ORIGIN)
-
 const allowedOrigins = [
     "http://localhost:5173",
     "https://chat-mern-front-nine.vercel.app"
@@ -26,12 +24,13 @@ app.use(cors({
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true
 }));
-app.options("*", cors({
+/*app.options("*", cors({
     origin: allowedOrigins,
     credentials: true
-}));
+}));*/
 
 app.use(cookieParser());
+
 app.use(express.json());
 app.use("/uploads/profiles", express.static("uploads/profiles"))
 

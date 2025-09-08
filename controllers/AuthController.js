@@ -6,9 +6,7 @@ const maxAge = 1000 * 60 * 60 * 24 * 3;
 
 
 const createToken = (email, userId) => {
-    return jwt.sign({email,userId}, process.env.JWT_KEY, {expiresIn: maxAge ,
-        sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-        secure: process.env.NODE_ENV === "production",
+    return jwt.sign({email,userId}, process.env.JWT_KEY, {expiresIn: maxAge
     })
 }
 
@@ -22,9 +20,7 @@ export const signup = async (req, res) => {
         const user = await User.create({email, password});
 
         res.cookie('jwt',createToken(email,user.id),{
-            maxAge,
-            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-            secure: process.env.NODE_ENV === "production",
+            maxAge
 
         })
 
@@ -60,9 +56,7 @@ export const login = async (req, res) => {
         }
 
         res.cookie('jwt',createToken(email,user.id),{
-            maxAge,
-            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-            secure: process.env.NODE_ENV === "production",
+            maxAge
 
         })
 

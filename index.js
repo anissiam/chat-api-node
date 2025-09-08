@@ -14,25 +14,25 @@ const app = express();
 const port = process.env.PORT || 3001;
 const databaseURL = process.env.DATABASE_URL;
 
+console.log(process.env.ORIGIN)
+
+
 app.use(cors({
-    origin: [process.env.ORIGIN],
-    methods: ["GET", "POST", "PUT","PATCH", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials:true
+    origin: [
+        "https://chat-mern-front-nine.vercel.app"
+    ],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    credentials: true
 }));
-console.log(process.env.ORIGIN , "qqqqqqqqqqqqqqqqq")
-app.use(express.json())
-app.use(express.urlencoded())
-
-
-app.use("/uploads/profiles", express.static("uploads/profiles"))
-app.use("/uploads/files", express.static("uploads/files"))
 
 app.use(cookieParser());
 app.use(express.json());
+app.use("/uploads/profiles", express.static("uploads/profiles"))
+
+app.use("/uploads/files", express.static("uploads/files"))
 
 app.get('/',(req,res)=>{
-    res.json({Running : "Running"})
+    res.send("Running")
 })
 
 app.use('/api/auth',authRoutes);
@@ -43,12 +43,10 @@ app.use('/api/channel',channelRouter);
 const server =app.listen(port,()=>{
     console.log(`Server is running at http://localhost:${port}`);
 })
-console.log("55555")
+
 setupSocket(server);
-console.log("6666")
 mongoose.connect(databaseURL).then(()=> {
     console.log("Connected to database")})
-.catch(err=>{
-    console.log(err.message)
-})
-console.log("77777")
+    .catch(err=>{
+        console.log(err.message)
+    })

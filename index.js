@@ -16,9 +16,13 @@ const databaseURL = process.env.DATABASE_URL;
 
 console.log(process.env.ORIGIN)
 
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://chat-mern-front-nine.vercel.app"
+];
 
 app.use(cors({
-    origin: "*",
+    origin: allowedOrigins,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true
 }));

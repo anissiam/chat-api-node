@@ -6,7 +6,7 @@ const maxAge = 1000 * 60 * 60 * 24 * 3;
 
 
 const createToken = (email, userId) => {
-    return jwt.sign({email,userId}, process.env.JWT_KEY, {expiresIn: maxAge})
+    return jwt.sign({email,userId}, "hfiuewhf87wefh9w8f7h89wfh@!#%dfd", {expiresIn: maxAge})
 }
 
 export const signup = async (req, res) => {

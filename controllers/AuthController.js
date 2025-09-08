@@ -7,8 +7,9 @@ const maxAge = 1000 * 60 * 60 * 24 * 3;
 
 const createToken = (email, userId) => {
     return jwt.sign({email,userId}, process.env.JWT_KEY, {expiresIn: maxAge,
-        secure: true,      // لازم true على Render/Vercel (https)
-        sameSite: "none"   // عشان ينفع يتبعت من دومين مختلف
+        httpOnly: true,    // الكوكي ماينعرضش للـ JS في المتصفح
+        secure: true,      // لازم على https (Vercel / Render)
+        sameSite: "none"   // عشان الكوكي يشتغل عبر دومينات مختلفة
     })
 }
 
@@ -23,9 +24,9 @@ export const signup = async (req, res) => {
 
         res.cookie('jwt',createToken(email,user.id),{
             maxAge,
-            secure: true,      // لازم true على Render/Vercel (https)
-            sameSite: "none"   // عشان ينفع يتبعت من دومين مختلف
-
+            httpOnly: true,    // الكوكي ماينعرضش للـ JS في المتصفح
+            secure: true,      // لازم على https (Vercel / Render)
+            sameSite: "none"   // عشان الكوكي يشتغل عبر دومينات مختلفة
         })
 
         return res.status(201).json(
@@ -61,9 +62,9 @@ export const login = async (req, res) => {
 
         res.cookie('jwt',createToken(email,user.id),{
             maxAge,
-            secure: true,      // لازم true على Render/Vercel (https)
-            sameSite: "none"   // عشان ينفع يتبعت من دومين مختلف
-
+            httpOnly: true,    // الكوكي ماينعرضش للـ JS في المتصفح
+            secure: true,      // لازم على https (Vercel / Render)
+            sameSite: "none"   // عشان الكوكي يشتغل عبر دومينات مختلفة
         })
 
         return res.status(200).json(

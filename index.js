@@ -26,10 +26,10 @@ app.use(cors({
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true
 }));
-/*app.options("*", cors({
+app.options("*", cors({
     origin: allowedOrigins,
     credentials: true
-}));*/
+}));
 
 app.use(cookieParser());
 app.use(express.json());

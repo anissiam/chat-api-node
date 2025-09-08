@@ -43,10 +43,12 @@ app.use('/api/channel',channelRouter);
 const server =app.listen(port,()=>{
     console.log(`Server is running at http://localhost:${port}`);
 })
-
+console.log("55555")
 setupSocket(server);
+console.log("6666")
 mongoose.connect(databaseURL).then(()=> {
     console.log("Connected to database")})
 .catch(err=>{
     console.log(err.message)
 })
+console.log("77777")

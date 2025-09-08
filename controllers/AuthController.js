@@ -53,10 +53,10 @@ export const login = async (req, res) => {
             return res.status(401).json({message: 'Password is incorrect'})
         }
 
-        res.cookie('jwt',createToken(email,user.id),{
+        /*res.cookie('jwt',createToken(email,user.id),{
             maxAge
         })
-
+*/
         return res.status(200).json(
             {user:{id:user.id,
                     email:user.email,

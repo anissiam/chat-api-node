@@ -18,7 +18,7 @@ console.log(process.env.ORIGIN)
 
 
 app.use(cors({
-    origin: "https://chat-mern-front-nine.vercel.app",
+    origin: "*",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true
 }));

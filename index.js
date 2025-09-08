@@ -17,9 +17,11 @@ const databaseURL = process.env.DATABASE_URL;
 app.use(cors({
     origin: [process.env.ORIGIN],
     methods: ["GET", "POST", "PUT","PATCH", "DELETE"],
-    allowedHeaders: ['Content-Type', 'Origin', 'X-Requested-With', 'Accept', 'x-client-key', 'x-client-token', 'x-client-secret', 'Authorization'],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials:true
 }));
+app.options("*", cors());
+
 
 
 app.use("/uploads/profiles", express.static("uploads/profiles"))
@@ -29,7 +31,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.get('/',(req,res)=>{
-    res.send("Running")
+    res.json({Running : "Running"})
 })
 
 app.use('/api/auth',authRoutes);
